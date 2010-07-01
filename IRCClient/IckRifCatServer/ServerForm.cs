@@ -36,7 +36,7 @@ namespace IckRifCatServer
 
 		private void _PrintDebugMessage( string msg )
 		{
-			_debug.SelectionStart = _messages.TextLength;
+			_debug.SelectionStart = _debug.TextLength;
 			_debug.SelectionLength = 0;
 			_debug.SelectedText = msg + "\r\n";
 		}

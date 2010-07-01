@@ -91,7 +91,7 @@ namespace IckRifCatServer
 					break;
 			}
 
-			Program.MainForm.DebugMessage( String.Format( "ClientMessage -> {0}", msg.Command ) );
+			Program.MainForm.DebugMessage( String.Format( "ClientMessage {0}", msg.ToString() ) );
 		}
 
 		public Client( TcpClient connection )
