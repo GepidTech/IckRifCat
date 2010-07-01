@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ickRifCat", "ickRifCat\ickRifCat.csproj", "{06956761-3D4B-4511-BE9E-CC6D01BAA181}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParseMessage", "ParseMessage\ParseMessage.csproj", "{48B8E140-EFDA-4FC8-93AE-C88A89498633}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IckRifCatServer", "IckRifCatServer\IckRifCatServer.csproj", "{9B743AED-09D3-4026-857E-177A9C98C0DB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{06956761-3D4B-4511-BE9E-CC6D01BAA181}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06956761-3D4B-4511-BE9E-CC6D01BAA181}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06956761-3D4B-4511-BE9E-CC6D01BAA181}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06956761-3D4B-4511-BE9E-CC6D01BAA181}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48B8E140-EFDA-4FC8-93AE-C88A89498633}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48B8E140-EFDA-4FC8-93AE-C88A89498633}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48B8E140-EFDA-4FC8-93AE-C88A89498633}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48B8E140-EFDA-4FC8-93AE-C88A89498633}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B743AED-09D3-4026-857E-177A9C98C0DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B743AED-09D3-4026-857E-177A9C98C0DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B743AED-09D3-4026-857E-177A9C98C0DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B743AED-09D3-4026-857E-177A9C98C0DB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

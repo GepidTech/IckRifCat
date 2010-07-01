@@ -1,0 +1,78 @@
+﻿:verne.freenode.net NOTICE * :*** Looking up your hostname...
+:verne.freenode.net NOTICE * :*** Checking Ident
+:verne.freenode.net NOTICE * :*** Found your hostname
+:verne.freenode.net NOTICE * :*** No Ident response
+:verne.freenode.net 001 Gunter :Welcome to the freenode Internet Relay Chat Network Gunter
+:verne.freenode.net 002 Gunter :Your host is verne.freenode.net[216.155.130.130/6665], running version ircd-seven-1.0.1
+:verne.freenode.net 003 Gunter :This server was created Mon Feb 1 2010 at 11:30:14 EST
+:verne.freenode.net 004 Gunter verne.freenode.net ircd-seven-1.0.1 DOQRSZaghilopswz CFILMPQbcefgijklmnopqrstvz bkloveqjfI
+:verne.freenode.net 005 Gunter CHANTYPES=# EXCEPTS INVEX CHANMODES=eIbq,k,flj,CFLMPQcgimnprstz CHANLIMIT=#:120 PREFIX=(ov)@+ MAXLIST=bqeI:100 MODES=4 NETWORK=freenode KNOCK STATUSMSG=@+ CALLERID=g :are supported by this server
+:verne.freenode.net 005 Gunter SAFELIST ELIST=U CASEMAPPING=rfc1459 CHARSET=ascii NICKLEN=16 CHANNELLEN=50 TOPICLEN=390 ETRACE CPRIVMSG CNOTICE DEAF=D MONITOR=100 :are supported by this server
+:verne.freenode.net 005 Gunter FNC TARGMAX=NAMES:1,LIST:1,KICK:1,WHOIS:1,PRIVMSG:4,NOTICE:4,ACCEPT:,MONITOR: EXTBAN=$,arx WHOX CLIENTVER=3.0 :are supported by this server
+:verne.freenode.net 251 Gunter :There are 888 users and 57353 invisible on 24 servers
+:verne.freenode.net 252 Gunter 34 :IRC Operators online
+:verne.freenode.net 253 Gunter 41 :unknown connection(s)
+:verne.freenode.net 254 Gunter 32237 :channels formed
+:verne.freenode.net 255 Gunter :I have 1997 clients and 1 servers
+:verne.freenode.net 265 Gunter 1997 4611 :Current local users 1997, max 4611
+:verne.freenode.net 266 Gunter 58241 62068 :Current global users 58241, max 62068
+:verne.freenode.net 250 Gunter :Highest connection count: 4612 (4611 clients) (791116 connections received)
+:verne.freenode.net 375 Gunter :- verne.freenode.net Message of the Day - 
+:verne.freenode.net 372 Gunter :- Welcome to verne.freenode.net in Newark, NJ, US.
+:verne.freenode.net 372 Gunter :- Thanks to Choopa 'www.choopa.com' for providing this server!
+:verne.freenode.net 372 Gunter :-  
+:verne.freenode.net 372 Gunter :- You're using freenode, a service of Peer-Directed Projects
+:verne.freenode.net 372 Gunter :- Center Ltd (http://freenode.net/pdpc.shtml).
+:verne.freenode.net 372 Gunter :-  
+:verne.freenode.net 372 Gunter :- On the subject of fundraisers, we'd like to thank our donors, 
+:verne.freenode.net 372 Gunter :- hardware and bandwith sponsors and especially  The Gallery 
+:verne.freenode.net 372 Gunter :- Project (http://gallery.menalto.com/) and our corporate sponsor 
+:verne.freenode.net 372 Gunter :- Canonical Ltd (http://www.canonical.com) for the generous 
+:verne.freenode.net 372 Gunter :- support.
+:verne.freenode.net 372 Gunter :-  
+:verne.freenode.net 372 Gunter :- By connecting to freenode you indicate that you have read
+:verne.freenode.net 372 Gunter :- and agree to adhere to our policies and procedures as per
+:verne.freenode.net 372 Gunter :- the website (http://freenode.net). We would like to remind
+:verne.freenode.net 372 Gunter :- you that unauthorized public logging of channels on the
+:verne.freenode.net 372 Gunter :- network is prohibited. Public channel logging should only
+:verne.freenode.net 372 Gunter :- take place where the channel owner(s) has requested this
+:verne.freenode.net 372 Gunter :- and users of the channel are all made aware (if you are
+:verne.freenode.net 372 Gunter :- publically logging your channel, you may wish to keep a
+:verne.freenode.net 372 Gunter :- notice in topic and perhaps as a on-join message).
+:verne.freenode.net 372 Gunter :-  
+:verne.freenode.net 372 Gunter :- By registering your NICKNAME with Nickserv you agree that you
+:verne.freenode.net 372 Gunter :- are 13 years of age, or older. For more information about the
+:verne.freenode.net 372 Gunter :- Children's Online Privacy Protection Act please see their
+:verne.freenode.net 372 Gunter :- website at (http://www.coppa.org).
+:verne.freenode.net 372 Gunter :-  
+:verne.freenode.net 372 Gunter :- freenode runs an open proxy scanner. Your use of the network
+:verne.freenode.net 372 Gunter :- indicates your acceptance of this policy. For details on
+:verne.freenode.net 372 Gunter :- freenode network policy, please take a look at our policy
+:verne.freenode.net 372 Gunter :- page (http://freenode.net/policy.shtml). Thank you for using
+:verne.freenode.net 372 Gunter :- the network!
+:verne.freenode.net 372 Gunter :-  
+:verne.freenode.net 372 Gunter :- Don't forget to check out these other Peer-Directed Projects:
+:verne.freenode.net 372 Gunter :- FOSSCON [http://www.fosscon.org] and fossevents 
+:verne.freenode.net 372 Gunter :- [http://www.fossevents.org], and soon we'll repeat last years 
+:verne.freenode.net 372 Gunter :- success with Picnics for Geeks across the globe, more info at 
+:verne.freenode.net 372 Gunter :- [http://geeknic.org]
+:verne.freenode.net 372 Gunter :-  
+:verne.freenode.net 372 Gunter :- freenode is a service of Peer-Directed Projects Center Ltd,
+:verne.freenode.net 372 Gunter :- a not for profit organisation registered in England and Wales.
+:verne.freenode.net 372 Gunter :-  
+:verne.freenode.net 372 Gunter :- If you support the work we do and wish to donate to the PDPC, 
+:verne.freenode.net 372 Gunter :- you may do so over at http://freenode.net/pdpc_donations.shtml
+:verne.freenode.net 372 Gunter :-  
+:verne.freenode.net 372 Gunter :- Thank you for using freenode!
+:verne.freenode.net 372 Gunter :-  
+:verne.freenode.net 376 Gunter :End of /MOTD command.
+:Gunter MODE Gunter :+i
+:NickServ!NickServ@services. NOTICE Gunter :This NICKNAME is registered. Please choose a different NICKNAME, or identify via /msg NickServ identify <password>
+:NickServ!NickServ@services. NOTICE Gunter :Invalid password for gunter.
+:frigg!~frigg@freenode/utility-bot/frigg PRIVMSG Gunter :VERSION
+:Gunter!~scbirk1@pat.sac.com JOIN :#shamwow
+:verne.freenode.net 332 Gunter #shamwow :Sultan Flokenes
+:verne.freenode.net 333 Gunter #shamwow MrKotter 1267451217
+:verne.freenode.net 353 Gunter @ #shamwow :Gunter shoebootie
+:verne.freenode.net 366 Gunter #shamwow :End of /NAMES list.
+:ChanServ!ChanServ@services. NOTICE Gunter :[#shamwow] Abandon all hope ye who enter here

@@ -1,0 +1,309 @@
+﻿# --------------------------------------------------------------------------------------------------
+
+	nodeclare
+	
+	parser
+				class		IrcMsgParser
+				namespace	ParseMessage.ParseEngine
+				inherits	IrcMsgContext
+				uses		Gt.ParserLibrary.Readers
+							, Gt.ParserLibrary.Tokens
+							, Gt.ParserLibrary.Writers
+							, Gt.ParserLibrary.Parser
+							, System.Collections.Generic
+
+	tokenizer
+				class		IrcMsgTokens
+				namespace	ParseMessage.ParseEngine
+				uses		Gt.ParserLibrary.Readers
+							, Gt.ParserLibrary.Tokens
+							, Gt.ParserLibrary.Writers
+							
+# --------------------------------------------------------------------------------------------------
+
+		special =  $([-`\{\|\}) ; # "[", "]", "\", "`", "_", "^", "{", "|", "}"
+
+		digit    = $(0-9) ;
+
+        letter   = $(A-Za-z) ;
+
+		control  = $(\u0001-\u0009\u000B\u000c\u000E-\u001F) ;
+		
+		symbols  = $(\!-\.) ;
+		
+        others   = $(\u007E-\u00FF) ;
+        
+        extras   = $(;-?) ;
+        
+[token] SPACE = ' ' ;
+
+[token] COLON = ':' ;
+
+[token] AT    = '@' ;
+
+[token] BANG  = '!' ;
+
+[token] CR    =  "\r" ; 
+
+[token] LF    = "\n" ;
+
+[token] DOT   = '.' ;
+
+[token] SLASH = '/' ;
+
+[token,priority(9)] DIGITS = digit { digit } ;
+
+[token,priority(10)] THREEDIGITS = digit digit digit ;
+
+[token,priority(11)] WORD = letter { letter } ;
+
+[token,priority(10)] SHORTNAME = ( letter | digit ) { letter | digit | "-" } ;
+
+[token,priority(9)]  NICKNAME =  ( letter | special ) { letter | special | digit | "-" } ;
+
+[token] SPECIALS = special { special } ;
+
+[token] CONTROLS = control { control } ;
+
+[token] SYMBOLS = symbols { symbols } ;
+
+[token] OTHERS  = others { others } ;
+
+[token] EXTRAS  = extras { extras } ;
+
+# ---------- Messages ------------------------------------------------------------------------------
+
+[goalsymbol,eof]
+<Messages> ::=
+
+	<Message> { <Message> } ;
+	
+# ---------- message -------------------------------------------------------------------------------
+
+<Message>    ::=  
+%%			_currentMessage = new Message() ;
+
+			[ COLON <Prefix> SPACE ] <Command> 
+			
+			(
+				[ <Params> ]
+			)
+			
+		(	CR
+			
+%%			_messages.Add( _currentMessage ) ;
+%%			FireMessageRecieved() ;
+		)
+			LF
+ ;
+
+# ---------- prefix --------------------------------------------------------------------------------
+
+<Prefix>     ::=  
+
+	<ServerName-Or-NickName> 
+|
+	( <! _currentMessage.NickName =!> <NickName> [ <NickName-Info> @( _currentMessage.NickName ) ] ) ;
+
+<ServerName-Or-NickName> ::= 
+%%			System.String aName = String.Empty ;
+%%			System.String aPart = String.Empty ;
+
+			<!aName = !><ShortName> 
+			[ 
+				( 
+					(  
+						DOT 
+						<!aPart = !> <ShortName>
+%%						aName += "." + aPart ;
+					) 
+					{ 
+						DOT
+						<!aPart = !> <ShortName> 
+%%						aName += "." + aPart ;
+					} 
+%%					_currentMessage.ServerName = aName ;
+				) 
+			|
+				(
+%%					_currentMessage.NickName = aName ;
+					<NickName-Info> @( aName )
+				)
+			] ;
+
+[type(System.String), return( shortName )]
+<ShortName> ::= 
+%%			String shortName ;
+			<!shortName = !> SHORTNAME 
+		|	<!shortName = !> WORD ;
+
+[params( System.String nick )]
+<NickName-Info> ::=
+	[ 
+		BANG 
+		<!_currentMessage.User = !> <User> 
+	] 
+	AT 
+	<!_currentMessage.Host = !> <Host> ;
+
+[type(System.String), return(nick) ]
+<NickName> ::= 
+%%			string nick = String.Empty ;
+			<!nick = !> NICKNAME
+ ;
+
+
+# ---------- command -------------------------------------------------------------------------------
+
+<Command>    ::=
+			<!_currentMessage.Command = !> WORD 
+		| 
+			<!_currentMessage.Command = !> THREEDIGITS ;
+
+# ---------- param ---------------------------------------------------------------------------------
+
+<Params>      ::=
+%%			String text = "" ;
+
+			SPACE
+			( 
+				( (
+					<!text = !> <Middle>
+%%					_currentMessage.Params.Add( text ) ;
+)
+					[ <Params> ] 
+				) 
+			|
+				(
+					COLON 
+					[
+						<!text = !> <Trailer> 
+%%						_currentMessage.Params.Add( text ) ;
+					] 
+				) 
+			)
+ ;
+
+# ---------- Middle-Text ---------------------------------------------------------------------------
+
+[type(System.String), return( text )]
+
+<Middle-Text> ::= 
+%%			String text = "" ;
+
+			<!text = !> WORD 
+		|	<!text = !> DIGITS 
+		|	<!text = !> THREEDIGITS 
+		|	<!text = !> SHORTNAME 
+		|	<!text = !> NICKNAME 
+		|	<!text = !> SPECIALS 
+		|	<!text = !> CONTROLS 
+		|	<!text = !> SYMBOLS 
+		|	<!text = !> DOT
+		|	<!text = !> OTHERS 
+		|	<!text = !> EXTRAS 
+		|	<!text = !> AT 
+		|	<!text = !> BANG
+		|	<!text = !> SLASH
+ ;
+
+# ---------- Middle --------------------------------------------------------------------------------
+
+[type( System.String ),return(text)]
+<Middle>      ::= 
+%%			String text = "" ;
+%%			String part = "" ;
+
+			<!text = !> <Middle-Text> 
+			{ 
+				<!part =!> <Middle-Text>
+			|	<!part =!> COLON
+%%				text += part ;
+			}
+ ;
+
+# ---------- Trailer-Text --------------------------------------------------------------------------
+
+[type( System.String ),return(text)]
+<Trailer-Text> ::= 
+%%			String text = "" ;
+			<!text = !> <Middle-Text> 
+		|	<!text = !> SPACE  
+		|	<!text = !> COLON
+ ;
+
+# ---------- Trailer -------------------------------------------------------------------------------
+
+[type( System.String ),return(text)]
+<Trailer>     ::= 
+%%			String text = "" ;
+%%			String part = "" ;
+			<!text = !> <Trailer-Text> 
+			{ 
+				<!part = !> <Trailer-Text> 
+%%				text += part ;
+			}
+ ;
+
+# ---------- User-Text -----------------------------------------------------------------------------
+
+[type(System.String), return( text )]
+<User-Text> ::=
+%%			String text ;
+
+		<!text = !> COLON
+	|	<!text = !> WORD 
+	|	<!text = !> SHORTNAME 
+	|	<!text = !> NICKNAME 
+	|	<!text = !> SPECIALS 
+	|	<!text = !> OTHERS
+ ;
+
+# ---------- User ----------------------------------------------------------------------------------
+
+[type(System.String), return( userName )]
+<User> ::= 
+%%			String userName = "" ;
+%%			String parts = "" ;
+			<!userName = !> <User-Text>
+			{
+				<!parts = !> <User-Text>
+%%				userName += parts ;
+			}
+ ;
+
+# ---------- Host ----------------------------------------------------------------------------------
+
+[type(System.String),return( hostName )]
+<Host> ::= 
+%%			String hostName = "" ;
+%%			String part = "" ;
+
+			<!hostName = !><ShortName> 
+			[ 
+			(	DOT
+%%				hostName += "." ;
+			)
+				[
+					<!part = !> <Host> 
+%%					hostName += part ;
+				] 
+			]
+			
+			[ <Path> ]
+ ;
+ 
+
+# ----------  --------------------------------------------------------------------------------------
+
+<Path-Text> ::=
+	<ShortName>
+|	<NickName> ;
+
+# ---------- Path ----------------------------------------------------------------------------------
+
+<Path> ::= 
+	SLASH <Path-Text> { SLASH <Path-Text> } ;
+	
+# ----------  --------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------
