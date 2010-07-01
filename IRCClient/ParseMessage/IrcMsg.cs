@@ -12,6 +12,7 @@ namespace ParseMessage
 	public class IrcMsg
 	{
 		public event MessageRecievedHandler MessageRecievedEvent ;
+		public event ConnectionClosedHandler ConnectionClosedEvent ;
 
 		public IWriter Output { get; set; }
 
@@ -21,15 +22,25 @@ namespace ParseMessage
 				MessageRecievedEvent( this, msg ) ;
 		}
 
+		protected void FileConnectionClosed()
+		{
+			if ( ConnectionClosedEvent != null )
+			{
+				ConnectionClosedEvent( this );
+			}
+		}
+
 		public void ParseMessage(NetworkStream s)
 		{
 			IStream gFileIn = new TcpStream(s, "TcpStream");
 
-			IrcMsgContext msg = new IrcMsgParser(gFileIn);
+			IrcMsgParser msg = new IrcMsgParser(gFileIn);
 
 			msg.StdOut = Output;
 
-			msg.MessageRecievedEvent += new MessageRecievedHandler( (o, m) => FireMessageRecieved( m ) ) ; // /*msg_MessageRecievedEvent*/);
+			msg.MessageRecievedEvent += new MessageRecievedHandler( (o, m) => FireMessageRecieved( m ) ) ;
+			msg.ConnectionClosedEvent += new ConnectionClosedHandler( o => FileConnectionClosed() );
+
 			if (msg.Parse())
 			{
 			}

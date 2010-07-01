@@ -5,7 +5,7 @@
 	parser
 				class		IrcMsgParser
 				namespace	ParseMessage.ParseEngine
-				inherits	IrcMsgContext
+#				inherits	IrcMsgContext
 				uses		Gt.ParserLibrary.Readers
 							, Gt.ParserLibrary.Tokens
 							, Gt.ParserLibrary.Writers

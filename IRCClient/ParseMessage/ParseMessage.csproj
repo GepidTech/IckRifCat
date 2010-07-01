@@ -49,10 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions.cs" />
     <Compile Include="IrcMsg.cs" />
     <Compile Include="Message.cs" />
-    <Compile Include="ParseEngine\IrcMsgContext.cs" />
     <Compile Include="ParseEngine\IrcMsgParser.cs" />
+    <Compile Include="ParseEngine\IrcMsgParser.Parser.cs" />
     <Compile Include="ParseEngine\IrcMsgTokens.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TcpStream.cs" />
