@@ -66,7 +66,10 @@ namespace ParseMessage
 				{
 					SocketException sx = ix.InnerException as SocketException;
 
-					if ( sx != null && sx.ErrorCode == 10004 )
+					// want to catch connection closed errors which is indicated by and end of file
+					// by the stream.  This happens if the server closes the connection or any other
+					// external event that would force the socket to close.
+					if ( sx != null && ( sx.ErrorCode == 10004 || sx.ErrorCode == 10054 ) )
 						b = -1;
 
 					else
