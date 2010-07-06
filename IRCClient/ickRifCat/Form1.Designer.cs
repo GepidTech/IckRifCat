@@ -167,7 +167,6 @@
 			this._channelName.Name = "_channelName";
 			this._channelName.Size = new System.Drawing.Size( 100, 20 );
 			this._channelName.TabIndex = 14;
-			this._channelName.Text = "#shamwow";
 			// 
 			// _nickname
 			// 
@@ -175,7 +174,6 @@
 			this._nickname.Name = "_nickname";
 			this._nickname.Size = new System.Drawing.Size( 100, 20 );
 			this._nickname.TabIndex = 13;
-			this._nickname.Text = "Gunter";
 			// 
 			// _password
 			// 
@@ -184,7 +182,6 @@
 			this._password.PasswordChar = '*';
 			this._password.Size = new System.Drawing.Size( 100, 20 );
 			this._password.TabIndex = 12;
-			this._password.Text = "nopassword";
 			// 
 			// _userName
 			// 
@@ -192,7 +189,6 @@
 			this._userName.Name = "_userName";
 			this._userName.Size = new System.Drawing.Size( 100, 20 );
 			this._userName.TabIndex = 8;
-			this._userName.Text = "scbirk1";
 			// 
 			// _port
 			// 
@@ -200,7 +196,6 @@
 			this._port.Name = "_port";
 			this._port.Size = new System.Drawing.Size( 100, 20 );
 			this._port.TabIndex = 6;
-			this._port.Text = "6665";
 			// 
 			// _serverName
 			// 
