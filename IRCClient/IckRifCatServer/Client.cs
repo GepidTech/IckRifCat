@@ -14,12 +14,11 @@ namespace IckRifCatServer
 		enum States : int
 		{
 			Initial = 0
-		,	Server = 1
-		,	Password = 2
-		,	UserName = 3
-		,	Nickname = 4
-		,	Active = 5
-		,	Quit = 6
+		,	Server
+		,	Password 
+		,	Information
+		,	Active
+		,	Quit
 		} ;
 
 		TcpClient _clientSocket;
@@ -41,6 +40,8 @@ namespace IckRifCatServer
 
 		string leftOver = "";
 
+		string thisServerName = "GTIRCSERVER", thisServerVersion = "1.0";
+
 		public void SendClientMessage( string msg )
 		{
 			byte[] bytes = System.Text.ASCIIEncoding.ASCII.GetBytes( msg );
@@ -54,9 +55,52 @@ namespace IckRifCatServer
 
 		void InitialState( ParseMessage.Message msg )
 		{
-			if ( String.Compare( msg.Command, "PASS", true ) != 0 )
+			switch ( msg.Command.ToUpper() )
 			{
+				case "PASS":
+
+					password = msg.Params.Last<string>();
+					_state = States.Information;
+					break;
+
+				default:
+					break;
+
 			}
+
+		}
+
+		private void GatherUserInformation( ParseMessage.Message msg )
+		{
+			switch ( msg.Command.ToUpper() )
+			{
+				case "USER":
+					userName = msg.Params.Last<string>();
+					break;
+
+				case "NICK":
+					nickName = msg.Params.Last<string>();
+					break;
+
+				default:
+					break;
+			}
+
+			if ( !string.IsNullOrEmpty( userName ) && !string.IsNullOrEmpty( nickName ) )
+			{
+				_state = States.Active;
+				SendStartupInformation();
+
+			}
+
+		}
+
+		private void SendStartupInformation()
+		{
+			SendClientMessage( String.Format( "001 :Welcome {0}!{1}@{2}", nickName, userName, server ) );
+			SendClientMessage( String.Format( "002 :TO {0}, version {1}", thisServerName, thisServerVersion ) );
+			SendClientMessage( String.Format( "003 :Born on 7/4/2010" ) );
+			SendClientMessage( String.Format( "004 {0} {1} i &*!@", thisServerName, thisServerVersion) );
 		}
 
 		void _parser_MessageRecievedEvent( object sender, ParseMessage.Message msg )
@@ -67,31 +111,21 @@ namespace IckRifCatServer
 					InitialState( msg );
 					break;
 
-			}
-
-			switch ( msg.Command.ToUpper() )
-			{
-				case "PASS":
-					password = msg.Params.Last<string>();
+				case States.Information:
+					GatherUserInformation( msg );
 					break;
 
-				case "USER":
-					userName = msg.Params.Last<string>();
-					break;
-
-				case "NICK":
-					nickName = msg.Params.Last<string>();
-					break;
-
-				case "JOIN":
-					newChannel = msg.Params.Last<string>();
-					break;
-
-				default:
+				case States.Active :
+					HandleUserMessages( msg );
 					break;
 			}
 
 			Program.MainForm.DebugMessage( String.Format( "ClientMessage {0}", msg.ToString() ) );
+		}
+
+		private void HandleUserMessages( ParseMessage.Message msg )
+		{
+			throw new NotImplementedException();
 		}
 
 		public Client( TcpClient connection )

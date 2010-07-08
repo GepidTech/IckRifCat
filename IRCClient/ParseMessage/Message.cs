@@ -26,7 +26,7 @@ namespace ParseMessage
 
 			sw.WriteLine( "   Command -> {0}", this.Command );
 			sw.WriteLine( "    Server -> {0}", this.ServerName );
-			sw.WriteLine( " NickeName -> {0}", this.NickName );
+			sw.WriteLine( "  NickName -> {0}", this.NickName );
 			sw.WriteLine( "      Host -> {0}", this.Host );
 			sw.WriteLine( "      User -> {0}", this.User );
 
