@@ -280,6 +280,9 @@ namespace ickRifCat
 		void irc_MessageRecievedEvent(object sender, ParseMessage.Message msg)
 		{
 			string reply = String.Empty;
+
+			Debug( msg.ToString() );
+
 			switch ( msg.Command.ToUpper() )
 			{
 				case "PRIVMSG":
